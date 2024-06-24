@@ -34,6 +34,7 @@ contract MODUDAONFT is ERC721URIStorageUpgradeable, OwnableUpgradeable {
     mapping(uint256 => address) public participants;
     mapping(address => bool) public hasJoined;
     address public winner;
+    uint256 public winnerAmount;
     bool public hasVotedGovernance2;
 
     function initialize(
@@ -126,20 +127,11 @@ contract MODUDAONFT is ERC721URIStorageUpgradeable, OwnableUpgradeable {
                 keccak256(abi.encodePacked(block.timestamp, participantCount))
             ) % participantCount;
             winner = participants[randomIndex];
-            payable(winner).transfer(address(this).balance);
+            winnerAmount = address(this).balance;
+            payable(winner).transfer(winnerAmount);
 
             hasVotedGovernance2 = true;
         }
-    }
-
-    function resetNFT(uint256 tokenId, string memory newTokenURI) public {
-        address nftOwner = ownerOf(tokenId);
-        _burn(tokenId);
-
-        matedataURI = newTokenURI;
-
-        _safeMint(nftOwner, tokenId);
-        _setTokenURI(tokenId, matedataURI);
     }
 
     // Manage Functions
