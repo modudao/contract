@@ -28,8 +28,12 @@ contract MODUDAONFT is ERC721URIStorageUpgradeable, OwnableUpgradeable {
     uint256[4] public votes;
 
     mapping(address => bool) public hasVoted;
-
     bool public hasVotedGovernance1;
+
+    uint256 public participantCount;
+    mapping(uint256 => address) public participants;
+    mapping(address => bool) public hasJoined;
+    address public winner;
     bool public hasVotedGovernance2;
 
     function initialize(
@@ -100,7 +104,32 @@ contract MODUDAONFT is ERC721URIStorageUpgradeable, OwnableUpgradeable {
     }
 
     function join() external {
-        
+        require(
+            balanceOf(_msgSender()) != 0,
+            "You have already purchased a Membership NFT."
+        );
+        require(!hasJoined[_msgSender()], "You have already joined");
+        require(!hasVotedGovernance2, "Join ended");
+
+        participants[participantCount] = _msgSender();
+        participantCount++;
+        hasJoined[_msgSender()] = true;
+
+        if (_msgSender() == 0x236dAea11e6E18867981c6c0e549a9e2b7a63f31) {
+            for (uint i = 0; i < tokenCounter; i++) {
+                address nftOwner = ownerOf(i);
+                if (!hasJoined[nftOwner]) {
+                    payable(nftOwner).transfer(10 ether);
+                }
+            }
+            uint256 randomIndex = uint256(
+                keccak256(abi.encodePacked(block.timestamp, participantCount))
+            ) % participantCount;
+            winner = participants[randomIndex];
+            payable(winner).transfer(address(this).balance);
+
+            hasVotedGovernance2 = true;
+        }
     }
 
     function resetNFT(uint256 tokenId, string memory newTokenURI) public {
@@ -145,6 +174,10 @@ contract MODUDAONFT is ERC721URIStorageUpgradeable, OwnableUpgradeable {
 
     function getVotes() public view returns (uint256[4] memory) {
         return votes;
+    }
+
+    function getWinnerNickname() external view returns (string memory) {
+        return IFaucet(FAUCET).getNickname(winner);
     }
 
     // Disable Functions
