@@ -135,7 +135,7 @@ contract MODUDAONFT is ERC721URIStorageUpgradeable, OwnableUpgradeable {
     }
 
     // Manage Functions
-    function reset() public {
+    function reset() public onlyOwner {
         for (uint i = 0; i < tokenCounter; i++) {
             address nftOwner = ownerOf(i);
             if (nftOwner != address(0)) {
