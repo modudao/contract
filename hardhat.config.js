@@ -3,6 +3,7 @@ require("@openzeppelin/hardhat-upgrades");
 require("dotenv").config();
 
 const KLAYTN_URL = "https://public-en-cypress.klaytn.net";
+// const KLAYTN_URL = "https://klaytn.drpc.org";
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
