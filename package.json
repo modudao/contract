@@ -4,7 +4,8 @@
     "@openzeppelin/contracts-upgradeable": "^5.0.2",
     "@openzeppelin/hardhat-upgrades": "^3.1.1",
     "dotenv": "^16.4.5",
-    "hardhat": "^2.20.1"
+    "hardhat": "^2.20.1",
+    "mysql2": "^3.10.1"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0"
