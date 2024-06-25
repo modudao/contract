@@ -1,6 +1,6 @@
 const { ethers, upgrades } = require("hardhat");
 
-const NFT_ADDRESS = "0xF0209111c0af1eB142757CE1399876CDcE06E9F5";
+const NFT_ADDRESS = "0x8aDfAA9C3ACaE1E519661C15aA1c05727b0387D2";
 
 async function main() {
     let [deployer] = await ethers.getSigners();
