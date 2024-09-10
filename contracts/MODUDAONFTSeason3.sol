@@ -12,13 +12,13 @@ contract MODUDAONFTSeason3 is ERC721URIStorageUpgradeable, OwnableUpgradeable {
     uint256 public constant PRICE = 10 ether;
     address public constant FAUCET = 0x382F00221de389998D09b79255728B72aFe97469;
     string public constant METADATA_URL1 =
-        "https://raw.githubusercontent.com/modudao/images/main/metadata1.json";
+        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata1.json";
     string public constant METADATA_URL2 =
-        "https://raw.githubusercontent.com/modudao/images/main/metadata2.json";
+        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata2.json";
     string public constant METADATA_URL3 =
-        "https://raw.githubusercontent.com/modudao/images/main/metadata3.json";
+        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata3.json";
     string public constant METADATA_URL4 =
-        "https://raw.githubusercontent.com/modudao/images/main/metadata4.json";
+        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata4.json";
 
     uint256 public tokenCounter;
     string public matedataURI;
@@ -44,7 +44,7 @@ contract MODUDAONFTSeason3 is ERC721URIStorageUpgradeable, OwnableUpgradeable {
         __ERC721_init(_name, _symbol);
         __Ownable_init(_msgSender());
 
-        matedataURI = "https://raw.githubusercontent.com/modudao/images/main/metadata.json";
+        matedataURI = "https://raw.githubusercontent.com/modudao/images/main/season3/metadata.json";
     }
 
     // External Functions
@@ -148,7 +148,7 @@ contract MODUDAONFTSeason3 is ERC721URIStorageUpgradeable, OwnableUpgradeable {
     }
 
     function resetMeataURL() external onlyOwner {
-        matedataURI = "https://raw.githubusercontent.com/modudao/images/main/metadata.json";
+        matedataURI = "https://raw.githubusercontent.com/modudao/images/main/season3/metadata.json";
 
         for (uint i = 0; i < tokenCounter; i++) {
             address nftOwner = ownerOf(i);
