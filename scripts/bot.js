@@ -11,7 +11,10 @@ const config = {
     database: process.env.DB_NAME,
 };
 
-const FAUCET_ADDRESS = "0xc85fcd35DCc28e2283354Cf4ED5D1f3299A90D18";
+// seson2
+// const FAUCET_ADDRESS = "0xc85fcd35DCc28e2283354Cf4ED5D1f3299A90D18";
+// seson3
+const FAUCET_ADDRESS = "0x382F00221de389998D09b79255728B72aFe97469";
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -31,10 +34,10 @@ async function main() {
         const faucetAddrs = new Set(faucetData.map(item => item[1]));
 
         dbData = dbData.filter(item => !faucetAddrs.has(item.addr));
+        console.log("dbData", dbData);
 
         if (dbData.length == 0) { await sleep(10000); continue; }
-
-        console.log("dbData:", dbData);
+        
         tx = await faucet.distributeToUsers(dbData);
         await tx.wait();
         console.log("tx hash:", tx.hash);
