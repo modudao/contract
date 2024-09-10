@@ -147,6 +147,18 @@ contract MODUDAONFT is ERC721URIStorageUpgradeable, OwnableUpgradeable {
         tokenCounter = 0;
     }
 
+    function resetMeataURL() external onlyOwner {
+        matedataURI = "https://raw.githubusercontent.com/modudao/images/main/metadata.json";
+
+        for (uint i = 0; i < tokenCounter; i++) {
+            address nftOwner = ownerOf(i);
+            _burn(i);
+
+            _safeMint(nftOwner, i);
+            _setTokenURI(i, matedataURI);
+        }
+    }
+
     // View Functions
     function getUsers() external view returns (address[] memory) {
         address[] memory users = new address[](tokenCounter);
