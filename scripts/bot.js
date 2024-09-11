@@ -53,4 +53,4 @@ main()
         process.exit(1);
     });
 
-
+// npx hardhat run scripts/bot.js --network klay
