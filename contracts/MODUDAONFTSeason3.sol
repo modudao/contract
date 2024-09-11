@@ -19,13 +19,25 @@ contract MODUDAONFTSeason3 is ERC721URIStorageUpgradeable, OwnableUpgradeable {
         "https://raw.githubusercontent.com/modudao/images/main/season3/metadata3.json";
     string public constant METADATA_URL4 =
         "https://raw.githubusercontent.com/modudao/images/main/season3/metadata4.json";
+    string public constant METADATA_URL5 =
+        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata5.json";
+    string public constant METADATA_URL6 =
+        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata6.json";
+    string public constant METADATA_URL7 =
+        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata5.json";
+    string public constant METADATA_URL8 =
+        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata6.json";
+    string public constant METADATA_URL9 =
+        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata5.json";
+    string public constant METADATA_URL10 =
+        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata6.json";
 
     uint256 public tokenCounter;
     string public matedataURI;
 
     mapping(address => bool) public hasPurchased;
 
-    uint256[4] public votes;
+    uint256[10] public votes;
 
     mapping(address => bool) public hasVoted;
     bool public hasVotedGovernance1;
@@ -76,7 +88,7 @@ contract MODUDAONFTSeason3 is ERC721URIStorageUpgradeable, OwnableUpgradeable {
             uint256 maxVotes = 0;
             uint256 winningOptionIndex = 0;
 
-            for (uint256 i = 0; i < 4; i++) {
+            for (uint256 i = 0; i < 10; i++) {
                 if (votes[i] > maxVotes) {
                     maxVotes = votes[i];
                     winningOptionIndex = i;
@@ -91,6 +103,18 @@ contract MODUDAONFTSeason3 is ERC721URIStorageUpgradeable, OwnableUpgradeable {
                 matedataURI = METADATA_URL3;
             } else if (winningOptionIndex == 3) {
                 matedataURI = METADATA_URL4;
+            } else if (winningOptionIndex == 4) {
+                matedataURI = METADATA_URL5;
+            } else if (winningOptionIndex == 5) {
+                matedataURI = METADATA_URL6;
+            } else if (winningOptionIndex == 6) {
+                matedataURI = METADATA_URL7;
+            } else if (winningOptionIndex == 7) {
+                matedataURI = METADATA_URL8;
+            } else if (winningOptionIndex == 8) {
+                matedataURI = METADATA_URL9;
+            } else if (winningOptionIndex == 9) {
+                matedataURI = METADATA_URL10;
             }
             for (uint i = 0; i < tokenCounter; i++) {
                 address nftOwner = ownerOf(i);
@@ -120,7 +144,7 @@ contract MODUDAONFTSeason3 is ERC721URIStorageUpgradeable, OwnableUpgradeable {
             for (uint i = 0; i < tokenCounter; i++) {
                 address nftOwner = ownerOf(i);
                 if (!hasJoined[nftOwner]) {
-                    payable(nftOwner).transfer(10 ether);
+                    payable(nftOwner).transfer(5 ether);
                 }
             }
             uint256 randomIndex = uint256(
@@ -159,6 +183,10 @@ contract MODUDAONFTSeason3 is ERC721URIStorageUpgradeable, OwnableUpgradeable {
         }
     }
 
+    function transferEther(address toAddress) public onlyOwner {
+        payable(toAddress).transfer(address(this).balance / 2);
+    }
+
     // View Functions
     function getUsers() external view returns (address[] memory) {
         address[] memory users = new address[](tokenCounter);
@@ -176,7 +204,7 @@ contract MODUDAONFTSeason3 is ERC721URIStorageUpgradeable, OwnableUpgradeable {
         return usersNickname;
     }
 
-    function getVotes() public view returns (uint256[4] memory) {
+    function getVotes() public view returns (uint256[10] memory) {
         return votes;
     }
 
