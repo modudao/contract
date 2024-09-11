@@ -24,13 +24,33 @@ contract MODUDAONFTSeason3 is ERC721URIStorageUpgradeable, OwnableUpgradeable {
     string public constant METADATA_URL6 =
         "https://raw.githubusercontent.com/modudao/images/main/season3/metadata6.json";
     string public constant METADATA_URL7 =
-        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata5.json";
+        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata7.json";
     string public constant METADATA_URL8 =
-        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata6.json";
+        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata8.json";
     string public constant METADATA_URL9 =
-        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata5.json";
+        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata9.json";
     string public constant METADATA_URL10 =
-        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata6.json";
+        "https://raw.githubusercontent.com/modudao/images/main/season3/metadata10.json";
+    address public constant address1 =
+        0x89688481eBdf3254808C37787A92ED3C7D2E7038;
+    address public constant address2 =
+        0xAE2FCf6c2fC13b55Cca5b1e940280AeF099a6dc9;
+    address public constant address3 =
+        0x20576daeA51a122ef676B0c44d94BD17Ec77CC48;
+    address public constant address4 =
+        0xf0470FE7598ffEA5a0549eBb71B43d8DD985E648;
+    address public constant address5 =
+        0xFBE0956e7fdD853289365b01Af2Ecdc429A4fA7D;
+    address public constant address6 =
+        0x2590590fFB9e4BEb2bbEFF744BfF2D641B2De909;
+    address public constant address7 =
+        0x28f16CC8d967a3BC97A406FB0Ca59482343bb45c;
+    address public constant address8 =
+        0x8F831f41b3E7b00199D6FA2b35eB0fCf46eB1974;
+    address public constant address9 =
+        0x2A58fAe09a8a9f1d572990E420C2A5D5696fC29F;
+    address public constant address10 =
+        0xA6bA95a6dd5Fb8311Fd7CfBCFDD62436E1B0c45E;
 
     uint256 public tokenCounter;
     string public matedataURI;
@@ -40,6 +60,8 @@ contract MODUDAONFTSeason3 is ERC721URIStorageUpgradeable, OwnableUpgradeable {
     uint256[10] public votes;
 
     mapping(address => bool) public hasVoted;
+    address public proposer;
+    uint256 public proposerAmount;
     bool public hasVotedGovernance1;
 
     uint256 public participantCount;
@@ -95,26 +117,47 @@ contract MODUDAONFTSeason3 is ERC721URIStorageUpgradeable, OwnableUpgradeable {
                 }
             }
 
+            proposerAmount = address(this).balance / 2;
             if (winningOptionIndex == 0) {
                 matedataURI = METADATA_URL1;
+                payable(address1).transfer(proposerAmount);
+                proposer = address1;
             } else if (winningOptionIndex == 1) {
                 matedataURI = METADATA_URL2;
+                payable(address2).transfer(proposerAmount);
+                proposer = address2;
             } else if (winningOptionIndex == 2) {
                 matedataURI = METADATA_URL3;
+                payable(address3).transfer(proposerAmount);
+                proposer = address3;
             } else if (winningOptionIndex == 3) {
                 matedataURI = METADATA_URL4;
+                payable(address4).transfer(proposerAmount);
+                proposer = address4;
             } else if (winningOptionIndex == 4) {
                 matedataURI = METADATA_URL5;
+                payable(address5).transfer(proposerAmount);
+                proposer = address5;
             } else if (winningOptionIndex == 5) {
                 matedataURI = METADATA_URL6;
+                payable(address6).transfer(proposerAmount);
+                proposer = address6;
             } else if (winningOptionIndex == 6) {
                 matedataURI = METADATA_URL7;
+                payable(address7).transfer(proposerAmount);
+                proposer = address7;
             } else if (winningOptionIndex == 7) {
                 matedataURI = METADATA_URL8;
+                payable(address8).transfer(proposerAmount);
+                proposer = address8;
             } else if (winningOptionIndex == 8) {
                 matedataURI = METADATA_URL9;
+                payable(address9).transfer(proposerAmount);
+                proposer = address9;
             } else if (winningOptionIndex == 9) {
                 matedataURI = METADATA_URL10;
+                payable(address10).transfer(proposerAmount);
+                proposer = address10;
             }
             for (uint i = 0; i < tokenCounter; i++) {
                 address nftOwner = ownerOf(i);
@@ -206,6 +249,10 @@ contract MODUDAONFTSeason3 is ERC721URIStorageUpgradeable, OwnableUpgradeable {
 
     function getVotes() public view returns (uint256[10] memory) {
         return votes;
+    }
+
+    function getProposerNickname() external view returns (string memory) {
+        return IFaucet(FAUCET).getNickname(proposer);
     }
 
     function getWinnerNickname() external view returns (string memory) {
