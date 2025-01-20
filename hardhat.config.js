@@ -2,8 +2,8 @@ require("@nomicfoundation/hardhat-toolbox");
 require("@openzeppelin/hardhat-upgrades");
 require("dotenv").config();
 
-const KLAYTN_URL = "https://public-en-cypress.klaytn.net";
-// const KLAYTN_URL = "https://klaytn.drpc.org";
+const KLAYTN_URL = "https://public-en.node.kaia.io";
+// const KLAYTN_URL = "https://1rpc.io/klay";
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
