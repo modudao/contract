@@ -14,7 +14,9 @@ const config = {
 // seson2
 // const FAUCET_ADDRESS = "0xc85fcd35DCc28e2283354Cf4ED5D1f3299A90D18";
 // seson3
-const FAUCET_ADDRESS = "0x382F00221de389998D09b79255728B72aFe97469";
+// const FAUCET_ADDRESS = "0x382F00221de389998D09b79255728B72aFe97469";
+// seson4
+const FAUCET_ADDRESS = "0x642662544F99E28E69FaD5ec175687aD168D34C0";
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
