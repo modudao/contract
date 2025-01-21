@@ -30,7 +30,7 @@ contract RWANFTSeason4 is ERC721URIStorageUpgradeable, OwnableUpgradeable {
             balanceOf(_msgSender()) == 0,
             "You have already receive a RWA NFT."
         );
-        require(tokenCounter < 1, "TokenCounter must be less than 3.");
+        require(tokenCounter < 3, "TokenCounter must be less than 3.");
 
         _safeMint(msg.sender, tokenCounter);
         _setTokenURI(tokenCounter, matedataURI);
